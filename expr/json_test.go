@@ -38,6 +38,22 @@ func TestUnmarshalStringVal(t *testing.T) {
 	assert.Equal(t, expr, Want)
 }
 
+func TestMarshalBooleanVal(t *testing.T) {
+	expr := BooleanExpr(false)
+	byteData, err := json.Marshal(&expr)
+	assert.Nil(t, err, "checking given error")
+	assert.JSONEq(t, `false`, string(byteData))
+}
+
+func TestUnmarshalBooleanVal(t *testing.T) {
+	byteData := []byte(`true`)
+	expr := NewExpr()
+	Want := BooleanExpr(true)
+	err := json.Unmarshal(byteData, &expr)
+	assert.Nil(t, err, "checking given error")
+	assert.Equal(t, expr, Want)
+}
+
 func TestMarshalIntNumberVal(t *testing.T) {
 	expr := NumberExpr(15)
 	byteData, err := json.Marshal(&expr)

@@ -21,13 +21,15 @@ type Type int
 const (
 	TYPE_STRING Type = iota
 	TYPE_NUMBER
+	TYPE_BOOLEAN
 	TYPE_ARRAY
 	TYPE_OPERATOR
 )
 
 type Expr struct {
-	Type      Type `json:"-"`
-	NumberVal float64
-	StringVal string
-	ArrayVal  []Expr
+	Type       Type `json:"-"`
+	NumberVal  float64
+	StringVal  string
+	BooleanVal bool
+	ArrayVal   []Expr
 }

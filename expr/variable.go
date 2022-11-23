@@ -23,6 +23,13 @@ func StringExpr(str string) Expr {
 	}
 }
 
+func BooleanExpr(b bool) Expr {
+	return Expr{
+		Type:       TYPE_BOOLEAN,
+		BooleanVal: b,
+	}
+}
+
 func OperatorExpr(o string) Expr {
 	return Expr{
 		Type:      TYPE_OPERATOR,

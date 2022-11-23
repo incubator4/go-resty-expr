@@ -25,6 +25,8 @@ func (expr *Expr) MarshalJSON() ([]byte, error) {
 	switch expr.Type {
 	case TYPE_NUMBER:
 		return json.Marshal(expr.NumberVal)
+	case TYPE_BOOLEAN:
+		return json.Marshal(expr.BooleanVal)
 	case TYPE_STRING, TYPE_OPERATOR:
 		return json.Marshal(expr.StringVal)
 	case TYPE_ARRAY:
@@ -43,6 +45,9 @@ func (expr *Expr) UnmarshalJSON(buf []byte) error {
 	if floatVal, floatOk := tmp.(float64); floatOk {
 		expr.Type = TYPE_NUMBER
 		expr.NumberVal = floatVal
+	} else if boolVal, boolOk := tmp.(bool); boolOk {
+		expr.Type = TYPE_BOOLEAN
+		expr.BooleanVal = boolVal
 	} else if stringVal, stringOk := tmp.(string); stringOk {
 		switch stringVal {
 		case "==", "~=", "~~", "~*", "!", "has", "in", "<", ">", "ipmatch", "AND", "OR":
