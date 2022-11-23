@@ -13,6 +13,8 @@ var (
 	IPMatch                 = OperatorExpr("ipmatch")
 	AND                     = OperatorExpr("AND")
 	OR                      = OperatorExpr("OR")
+	NOTANT                  = OperatorExpr("!AND")
+	NOTOR                   = OperatorExpr("!OR")
 )
 
 func (e Expr) Equals(expr Expr) Expr {
@@ -35,6 +37,14 @@ func (e Expr) NotIn(expr Expr) Expr {
 	return e.Not().In(expr)
 }
 
+func (e Expr) Has(expr Expr) Expr {
+	return e.AppendExpr(Has, expr)
+}
+
+func (e Expr) IPMatch(expr Expr) Expr {
+	return e.AppendExpr(IPMatch, expr)
+}
+
 func (e Expr) GreaterThan(expr Expr) Expr {
 	return e.AppendExpr(GreaterThan, expr)
 }
@@ -49,4 +59,20 @@ func And(exprArray ...Expr) Expr {
 
 func Or(exprArray ...Expr) Expr {
 	return OR.CreateArrayExpr(exprArray...)
+}
+
+func NotAnd(exprArray ...Expr) Expr {
+	return NOTANT.CreateArrayExpr(exprArray...)
+}
+
+func NotOr(exprArray ...Expr) Expr {
+	return NOTOR.CreateArrayExpr(exprArray...)
+}
+
+func (e Expr) RegularMatch(expr Expr) Expr {
+	return e.AppendExpr(RegularMatch, expr)
+}
+
+func (e Expr) InsensitiveRegularMatch(expr Expr) Expr {
+	return e.AppendExpr(InsensitiveRegularMatch, expr)
 }
