@@ -16,8 +16,8 @@
 
 package expr
 
-func ExprFromStrings(stringArray []string) *Expr {
-	e := &Expr{Type: TYPE_ARRAY}
+func ExprFromStrings(stringArray []string) Expr {
+	e := ArrayExpr()
 	for _, str := range stringArray {
 		e.AppendString(str)
 	}
