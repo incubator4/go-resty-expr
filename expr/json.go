@@ -50,7 +50,7 @@ func (expr *Expr) UnmarshalJSON(buf []byte) error {
 		expr.BooleanVal = boolVal
 	} else if stringVal, stringOk := tmp.(string); stringOk {
 		switch stringVal {
-		case "==", "~=", "~~", "~*", "!", "has", "in", "<", ">", "ipmatch", "AND", "OR":
+		case "==", "~=", "~~", "~*", "!", "has", "in", "<", ">", "ipmatch", "AND", "OR", "!AND", "!OR":
 			expr.Type = TYPE_OPERATOR
 		default:
 			expr.Type = TYPE_STRING
